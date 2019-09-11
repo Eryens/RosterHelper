@@ -26,8 +26,15 @@ class HomeController extends Controller
      */
     private function createRoles()
     {
-        Role::create(['name'=>'admin']);
-        Role::create(['name'=>'user']);
+        //Role::create(['name'=>'admin']);
+        //Role::create(['name'=>'user']);
+        //Permission::create(['name' =>'admin access']);
+        //$user = auth()->user();
+
+        //$user->assignRole('admin');
+        //$permission = Permission::findById(1);
+        //$role = Role::findById(1);
+        //$role->givePermissionTo($permission);
     }
 
     /**
