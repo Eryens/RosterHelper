@@ -4,10 +4,14 @@
 // Variables
 @import 'variables';
 
+// Font awesome
 @import "node_modules/font-awesome/scss/font-awesome.scss";
+
+// Theme darkly variables
+@import 'node_modules/bootswatch/dist/darkly/variables';
 
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
 
-// Sb Admin theme
-@import '~startbootstrap-sb-admin/scss/sb-admin';
+// Theme darkly
+@import 'node_modules/bootswatch/dist/darkly/bootswatch';
