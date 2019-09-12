@@ -18,13 +18,15 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <!-- Custom app style -->
+    <link rel="stylesheet" type="text/css" href="{{ url('/css/style.css') }}" />
 </head>
 <body>
     <div id="app">
 
         @include('layouts.navbar')
 
-        <main class="py-4 container">
+        <main class="py-4 container main-container">
             
                 @yield('content')
             
