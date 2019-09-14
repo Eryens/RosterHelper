@@ -8,6 +8,6 @@ class Raids extends Model
 {
     public function raid()
     {
-        return $this->belingsTo('App\Raids');
+        return $this->belongsTo('App\Raids');
     }
 }

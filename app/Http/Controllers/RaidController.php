@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Raids;
 
 class RaidController extends Controller
 {
@@ -13,7 +14,8 @@ class RaidController extends Controller
      */
     public function index()
     {
-        return view('raid.index');
+        $raids = Raids::all();
+        return view('raid.index')->with('raids', $raids);
     }
 
     /**
@@ -23,7 +25,7 @@ class RaidController extends Controller
      */
     public function create()
     {
-        //
+        return view('raid.create');
     }
 
     /**
@@ -34,7 +36,17 @@ class RaidController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required',
+            'currentRaid' => 'required'
+        ]);
+
+        $raid = new Raids;
+        $raid->name = $request->input('name');
+        $raid->currentRaid = $request->input('currentRaid');
+        $raid->save();
+
+        return redirect('/raid')->with('success', 'Raid added');
     }
 
     /**
@@ -45,7 +57,7 @@ class RaidController extends Controller
      */
     public function show($id)
     {
-        //
+        // We shouldn't do anything here
     }
 
     /**
@@ -56,7 +68,9 @@ class RaidController extends Controller
      */
     public function edit($id)
     {
-        //
+        $raid = Raids::find($id);
+
+        return view('raid.edit')->with('raid', $raid);
     }
 
     /**
@@ -68,7 +82,17 @@ class RaidController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required',
+            'currentRaid' => 'required'
+        ]);
+
+        $raid = Raids::find($id);
+        $raid->name = $request->input('name');
+        $raid->currentRaid = $request->input('currentRaid');
+        $raid->save();
+
+        return redirect('raid')->with('success', 'Raid edited');
     }
 
     /**
@@ -79,6 +103,8 @@ class RaidController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $raid = Raids::find($id);
+        $raid->delete();
+        return redirect('raid')->with('success', 'Raid deleted');
     }
 }
