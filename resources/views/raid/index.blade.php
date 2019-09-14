@@ -14,7 +14,8 @@
                     <table class="table table-bordered table-striped">
                             <thead>
                                 <tr>
-                                    <th class="">Name</th>
+                                    <th>Name</th>
+                                    <th>Current</th>
                                     <th class="td-action">Actions</th>
                                 </tr>
                             </thead>
@@ -22,8 +23,13 @@
                                 @foreach($raids as $raid)
                                     <tr>
                                         <td>{{$raid->name}}</td>
+                                        <td>
+                                            @if($raid->currentRaid)
+                                                <i class="fas fa-check"></i>
+                                            @endif
+                                        </td>
                                         <td class="td-action">
-                                            <a href="/raids/{{$raid->id}}/edit" class="btn btn-warning btn-action"><i class="fas fa-edit"></i></a>
+                                            <a href="/raid/{{$raid->id}}/edit" class="btn btn-warning btn-action"><i class="fas fa-edit"></i></a>
                                         </td>
                                     </tr>
                                 @endforeach

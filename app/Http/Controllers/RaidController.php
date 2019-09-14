@@ -38,12 +38,11 @@ class RaidController extends Controller
     {
         $this->validate($request, [
             'name' => 'required',
-            'currentRaid' => 'required'
         ]);
 
         $raid = new Raids;
         $raid->name = $request->input('name');
-        $raid->currentRaid = $request->input('currentRaid');
+        $raid->currentRaid = $request->has('currentRaid');
         $raid->save();
 
         return redirect('/raid')->with('success', 'Raid added');
@@ -84,12 +83,11 @@ class RaidController extends Controller
     {
         $this->validate($request, [
             'name' => 'required',
-            'currentRaid' => 'required'
         ]);
 
         $raid = Raids::find($id);
         $raid->name = $request->input('name');
-        $raid->currentRaid = $request->input('currentRaid');
+        $raid->currentRaid = $request->has('currentRaid');
         $raid->save();
 
         return redirect('raid')->with('success', 'Raid edited');

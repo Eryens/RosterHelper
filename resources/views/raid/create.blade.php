@@ -15,7 +15,7 @@
                         <br />
 
                         {{Form::label('currentRaid', 'Current raid')}}
-                        {{Form::checkbox('currentRaid', '0', ['class' => 'form-control checkbox', 'checked' => 'unchecked'])}}
+                        {{Form::checkbox('currentRaid','', true)}}
                     </div>
             
                     {{Form::submit('Create', ['class' => 'btn btn-success'])}}
