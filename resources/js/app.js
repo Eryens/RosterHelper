@@ -6,6 +6,9 @@
 
 require('./bootstrap');
 
+import Sortable from 'sortablejs';
+import sortable from 'jquery-sortablejs';
+
 window.Vue = require('vue');
 
 /**
@@ -19,7 +22,8 @@ window.Vue = require('vue');
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+Vue.component('order-list', require('./components/OrderList.vue').default);
+Vue.component('display-order', require('./components/DisplayOrder.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -29,6 +33,8 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 
 const app = new Vue({
     el: '#app',
+    Sortable,
+    sortable,
 });
 
 require('@fortawesome/fontawesome-free/js/all.js');

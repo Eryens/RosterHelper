@@ -12,3 +12,59 @@
         margin-top: 0;
     }
 }
+
+/* Display order */
+
+.order-list {
+    background-color: #ab6f0f;
+    font-family: 'Roboto Mono', monospace;
+    font-size: 16px;
+    margin-top: $space-between-elems;
+}
+
+#display-order {
+    margin-top: $space-between-elems;
+}
+
+.btn {
+    margin-top: $space-between-elems;
+}
+
+h4 {
+    margin-top: $space-between-elems;
+    margin-bottom: $space-between-elems;
+}
+
+.boss-icon {
+    max-height: 40px;
+    margin-right: 10px;
+}
+
+.list-group-item {
+    font-size: 16px;
+}
+
+.priority-number {
+    height:66px;
+    margin-right:0;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 40px;
+    font-weight: bolder;
+}
+
+@media only screen and (max-width: 600px) {
+    .col-numbers {
+        display:none;
+    }
+}
+
+.col-numbers {
+    margin-right:0;
+    padding-right:0;
+}
+
+.col-bosses {
+    margin-left: 0;
+    padding-left:0;
+}

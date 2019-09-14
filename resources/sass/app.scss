@@ -4,9 +4,6 @@
 // Variables
 @import 'variables';
 
-// Custom css
-@import 'custom';
-
 // Font awesome
 @import "node_modules/font-awesome/scss/font-awesome.scss";
 
@@ -19,4 +16,5 @@
 // Theme darkly
 @import 'node_modules/bootswatch/dist/darkly/bootswatch';
 
-
+// Custom css
+@import 'custom';
