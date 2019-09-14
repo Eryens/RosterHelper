@@ -13909,6 +13909,21 @@ a.text-dark:focus {
   color: #fff;
 }
 
+/* General */
+
+.btn {
+  margin-top: 20px;
+}
+
+h4 {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+table {
+  margin-top: 20px;
+}
+
 /* Main container */
 
 .main-container {
@@ -13935,15 +13950,6 @@ a.text-dark:focus {
 
 #display-order {
   margin-top: 20px;
-}
-
-.btn {
-  margin-top: 20px;
-}
-
-h4 {
-  margin-top: 20px;
-  margin-bottom: 20px;
 }
 
 .boss-icon {
@@ -13978,5 +13984,15 @@ h4 {
 .col-bosses {
   margin-left: 0;
   padding-left: 0;
+}
+
+/* Table */
+
+.btn-action {
+  margin-top: 0px;
+}
+
+.td-action {
+  max-width: 10px;
 }
 

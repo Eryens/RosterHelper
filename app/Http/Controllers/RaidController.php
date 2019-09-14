@@ -13,7 +13,7 @@ class RaidController extends Controller
      */
     public function index()
     {
-        //
+        return view('raid.index');
     }
 
     /**

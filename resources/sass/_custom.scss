@@ -1,3 +1,18 @@
+/* General */
+
+.btn {
+    margin-top: $space-between-elems;
+}
+
+h4 {
+    margin-top: $space-between-elems;
+    margin-bottom: $space-between-elems;
+}
+
+table {
+    margin-top: $space-between-elems;
+}
+
 /* Main container */
 
 .main-container {
@@ -24,15 +39,6 @@
 
 #display-order {
     margin-top: $space-between-elems;
-}
-
-.btn {
-    margin-top: $space-between-elems;
-}
-
-h4 {
-    margin-top: $space-between-elems;
-    margin-bottom: $space-between-elems;
 }
 
 .boss-icon {
@@ -67,4 +73,14 @@ h4 {
 .col-bosses {
     margin-left: 0;
     padding-left:0;
+}
+
+/* Table */
+
+.btn-action {
+    margin-top: 0px;
+}
+
+.td-action {
+    max-width: 10px;
 }
