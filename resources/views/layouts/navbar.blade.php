@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-md navbar-dark shadow-sm main-navbar">
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container">
         <a class="navbar-brand" href="{{ url('/') }}">
             Mythic Roster Helper

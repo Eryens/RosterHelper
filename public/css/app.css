@@ -1,5 +1,20 @@
 @import url(https://fonts.googleapis.com/css?family=Nunito);@import url(https://fonts.googleapis.com/css?family=Lato:400,700,400italic);@charset "UTF-8";
 
+/* Main container */
+
+.main-container {
+  margin-top: 15px;
+  background-color: #303030;
+  border-radius: 0.3rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+}
+
+@media only screen and (max-width: 600px) {
+  .main-container {
+    margin-top: 0;
+  }
+}
+
 /*!
  *  Font Awesome 4.7.0 by @davegandy - http://fontawesome.io - @fontawesome
  *  License - http://fontawesome.io/license (Font: SIL OFL 1.1, CSS: MIT License)
@@ -3214,13 +3229,13 @@ sup {
 }
 
 a {
-  color: #00bc8c;
+  color: #F39C12;
   text-decoration: none;
   background-color: transparent;
 }
 
 a:hover {
-  color: #007053;
+  color: #b06f09;
   text-decoration: underline;
 }
 
@@ -6198,12 +6213,12 @@ fieldset:disabled a.btn {
 
 .btn-link {
   font-weight: 400;
-  color: #00bc8c;
+  color: #F39C12;
   text-decoration: none;
 }
 
 .btn-link:hover {
-  color: #007053;
+  color: #b06f09;
   text-decoration: underline;
 }
 
