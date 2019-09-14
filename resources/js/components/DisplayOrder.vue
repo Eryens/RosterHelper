@@ -7,7 +7,3 @@
     </div>
 
 </template>
-
-<style>
-
-</style>

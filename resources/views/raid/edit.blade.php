@@ -33,8 +33,7 @@
                     </div>
                 </div>
             </div>
-            <h4>Bosses : </h4>
-            @include('raid.boss.boss-list')
+            <boss-list v-bind:idraid="{{$raid->id}}"></boss-list>
         </div>
     </div>
 
