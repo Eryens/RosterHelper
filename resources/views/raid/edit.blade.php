@@ -21,19 +21,19 @@
 
                 <div class="row">
                     <div class="col-lg-11">
-                        {{Form::submit('Edit', ['class' => 'btn btn-warning'])}}
+                        {{Form::submit('Edit Raid parameters', ['class' => 'btn btn-warning'])}}
                     </div>
                     {!! Form::close() !!}
                     <div class="col-lg-1" style="">
                         {!!Form::open(['action' => ['RaidController@destroy', $raid->id], 'method' => 'POST', 'class' => 'pull-right'])!!}
                             {{Form::hidden('_method', 'DELETE')}}
-                            {{Form::submit('Delete', ['class' => 'btn btn-danger'])}}
+                            {{Form::submit('Delete this raid', ['class' => 'btn btn-danger'])}}
                         {!!Form::close()!!}
                     </div>
                 </div>
             </div>
         </div>
-        @include('raid.boss.boss-list')
+        <boss-list v-bind:id-raid="{{$raid->id}}">></boss-list>
     </div>
 
 @endsection
@@ -42,7 +42,7 @@
 
 <script type="text/javascript" defer>
     $(function() {
-        console.log( "ready!" );
+        //console.log( "ready!" );
     });
 </script>
 

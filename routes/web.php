@@ -21,5 +21,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group(['middleware' => ['permission:admin access']], function () {
     Route::resource('raid', 'RaidController');
+    Route::resource('boss', 'BossController');
+    Route::get('/boss/addNew', 'BossController@addNew')->name('boss.addnew');
 });
     

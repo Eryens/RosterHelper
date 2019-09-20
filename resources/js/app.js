@@ -6,10 +6,34 @@
 
 require('./bootstrap');
 
+window.Vue = require('vue');
+
+// Adding vform
+import { Form, HasError, AlertError } from 'vform';
+Vue.component(HasError.name, HasError)
+Vue.component(AlertError.name, AlertError)
+window.Form = Form;
+
+// Adding sortableJS
 import Sortable from 'sortablejs';
 import sortable from 'jquery-sortablejs';
+window.Sortable = Sortable;
+window.sortable = sortable;
 
-window.Vue = require('vue');
+// Adding sweetAlert
+import swal from 'sweetalert2';
+window.Swal = swal;
+
+const Toast = swal.mixin({
+    toast: true,
+    position: 'top-end',
+    showConfirmButton: false,
+    timer: 3000
+});
+
+window.Fire = new Vue();
+
+window.Toast = Toast;
 
 /**
  * The following block of code may be used to automatically register your
@@ -34,8 +58,6 @@ Vue.component('boss-list', require('./components/ListBosses').default);
 
 const app = new Vue({
     el: '#app',
-    Sortable,
-    sortable,
 });
 
 require('@fortawesome/fontawesome-free/js/all.js');
