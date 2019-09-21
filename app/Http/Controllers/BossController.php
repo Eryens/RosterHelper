@@ -47,6 +47,8 @@ class BossController extends Controller
             'order' => 'required|String' 
         ]);
 
+        var_dump($request['name']);
+
         return Boss::create([
             'raid_id' => $request['idRaid'],
             'name' => $request['name'],
