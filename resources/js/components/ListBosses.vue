@@ -30,13 +30,15 @@
 
 
                         <div class="form-group">
-                            <input v-model="form.name" type="text" name="name" placeholder="Name"
+                            <label>Name : </label>
+                            <input v-model="form.name" type="text" name="name"
                             class="form-control" :class="{ 'is-invalid': form.errors.has('name') }">
                             <has-error :form="form" field="name"></has-error>
                         </div>
 
                         <div class="form-group">
-                            <input v-model="form.order" type="number" name="order" placeholder="1"
+                            <label>Order: </label>
+                            <input v-model="form.order" type="number" name="order"
                             class="form-control" :class="{ 'is-invalid': form.errors.has('order') }">
                             <has-error :form="form" field="order"></has-error>
                         </div>
@@ -84,6 +86,8 @@ export default {
         openCreateModal() {
             console.log('salut') ;
             $('#bossModal').modal('show');
+            this.form.clear();
+            this.form.reset();
             this.editMode = false;
         },
 

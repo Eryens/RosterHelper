@@ -41,7 +41,17 @@ class BossController extends Controller
      */
     public function store(Request $request)
     {
-        return 'store the boss';
+        $this->validate($request, [
+            'idRaid' => 'required|Numeric',
+            'name' => 'required|String|max:25',
+            'order' => 'required|String' 
+        ]);
+
+        return Boss::create([
+            'raid_id' => $request['idRaid'],
+            'name' => $request['name'],
+            'order' => $request['order'],
+        ]);
     }
 
     /**

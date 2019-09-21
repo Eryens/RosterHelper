@@ -6267,6 +6267,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     idRaid: {
@@ -6298,6 +6300,8 @@ __webpack_require__.r(__webpack_exports__);
     openCreateModal: function openCreateModal() {
       console.log('salut');
       $('#bossModal').modal('show');
+      this.form.clear();
+      this.form.reset();
       this.editMode = false;
     },
     updateBoss: function updateBoss() {},
@@ -49429,6 +49433,8 @@ var render = function() {
                       "div",
                       { staticClass: "form-group" },
                       [
+                        _c("label", [_vm._v("Name : ")]),
+                        _vm._v(" "),
                         _c("input", {
                           directives: [
                             {
@@ -49440,11 +49446,7 @@ var render = function() {
                           ],
                           staticClass: "form-control",
                           class: { "is-invalid": _vm.form.errors.has("name") },
-                          attrs: {
-                            type: "text",
-                            name: "name",
-                            placeholder: "Name"
-                          },
+                          attrs: { type: "text", name: "name" },
                           domProps: { value: _vm.form.name },
                           on: {
                             input: function($event) {
@@ -49467,6 +49469,8 @@ var render = function() {
                       "div",
                       { staticClass: "form-group" },
                       [
+                        _c("label", [_vm._v("Order: ")]),
+                        _vm._v(" "),
                         _c("input", {
                           directives: [
                             {
@@ -49478,11 +49482,7 @@ var render = function() {
                           ],
                           staticClass: "form-control",
                           class: { "is-invalid": _vm.form.errors.has("order") },
-                          attrs: {
-                            type: "number",
-                            name: "order",
-                            placeholder: "1"
-                          },
+                          attrs: { type: "number", name: "order" },
                           domProps: { value: _vm.form.order },
                           on: {
                             input: function($event) {

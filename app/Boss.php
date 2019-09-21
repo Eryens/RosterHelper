@@ -6,8 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Boss extends Model
 {
-    public function bosses()
+    public function raid()
     {
-        return $this->hasMany('App\Boss');
+        return $this->belongsTo('App\Raid');
     }
 }
