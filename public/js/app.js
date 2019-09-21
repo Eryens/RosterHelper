@@ -6269,6 +6269,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     idRaid: {
@@ -6305,11 +6312,36 @@ __webpack_require__.r(__webpack_exports__);
       this.editMode = false;
     },
     updateBoss: function updateBoss() {},
-    createBoss: function createBoss() {
+    deleteBoss: function deleteBoss(id) {
       var _this2 = this;
 
+      Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+      }).then(function (result) {
+        // Send to server   
+        _this2.form["delete"]('/boss/' + id).then(function () {
+          if (result.value) {
+            Swal.fire('Deleted!', 'Your file has been deleted.', 'success');
+
+            _this2.loadBosses();
+          }
+        })["catch"](function (error) {
+          Swal.fire('Attention gamers!', 'Something went wrong', 'warning');
+          console.log(error);
+        });
+      });
+    },
+    createBoss: function createBoss() {
+      var _this3 = this;
+
       this.form.post('/boss').then(function () {
-        _this2.loadBosses();
+        _this3.loadBosses();
 
         $('#bossModal').modal('hide');
         Toast.fire({
@@ -49392,7 +49424,38 @@ var render = function() {
       [_vm._v("Add a boss")]
     ),
     _vm._v(" "),
-    _vm._m(0),
+    _c("table", { staticClass: "table table-bordered" }, [
+      _vm._m(0),
+      _vm._v(" "),
+      _c(
+        "tbody",
+        _vm._l(_vm.bosses, function(boss) {
+          return _c("tr", { key: boss.id }, [
+            _c("td", [_vm._v(_vm._s(boss.name))]),
+            _vm._v(" "),
+            _c("td", [_vm._v(_vm._s(boss.order))]),
+            _vm._v(" "),
+            _c("td", [
+              _vm._m(1, true),
+              _vm._v(" "),
+              _c(
+                "a",
+                {
+                  staticClass: "btn btn-danger",
+                  on: {
+                    click: function($event) {
+                      return _vm.deleteBoss(boss.id)
+                    }
+                  }
+                },
+                [_c("i", { staticClass: "fas fa-trash" })]
+              )
+            ])
+          ])
+        }),
+        0
+      )
+    ]),
     _vm._v(" "),
     _c(
       "form",
@@ -49426,7 +49489,7 @@ var render = function() {
               },
               [
                 _c("div", { staticClass: "modal-content" }, [
-                  _vm._m(1),
+                  _vm._m(2),
                   _vm._v(" "),
                   _c("div", { staticClass: "modal-body" }, [
                     _c(
@@ -49502,7 +49565,7 @@ var render = function() {
                     )
                   ]),
                   _vm._v(" "),
-                  _vm._m(2)
+                  _vm._m(3)
                 ])
               ]
             )
@@ -49517,18 +49580,22 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("table", { staticClass: "table table-bordered" }, [
-      _c("thead", [
-        _c("tr", [
-          _c("th", [_vm._v("Name")]),
-          _vm._v(" "),
-          _c("th", [_vm._v("Order")]),
-          _vm._v(" "),
-          _c("th", [_vm._v("Actions")])
-        ])
-      ]),
-      _vm._v(" "),
-      _c("tbody")
+    return _c("thead", [
+      _c("tr", [
+        _c("th", [_vm._v("Name")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Order")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Actions")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("a", { staticClass: "btn btn-warning" }, [
+      _c("i", { staticClass: "fas fa-edit" })
     ])
   },
   function() {

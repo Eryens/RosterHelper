@@ -98,6 +98,10 @@ class BossController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $boss = Boss::findOrFail($id);
+
+        $boss->delete();
+
+        return ['message' => 'boss deleted'];
     }
 }

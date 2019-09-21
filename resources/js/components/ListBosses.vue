@@ -11,7 +11,14 @@
                 </tr>
             </thead>
             <tbody>
-
+                <tr v-for="boss in bosses" :key="boss.id">
+                    <td>{{boss.name}}</td>
+                    <td>{{boss.order}}</td>
+                    <td>
+                        <a class="btn btn-warning"><i class="fas fa-edit"></i></a>
+                        <a @click="deleteBoss(boss.id)" class="btn btn-danger"><i class="fas fa-trash"></i></a>
+                    </td>
+                </tr>
             </tbody>
         </table>
 
@@ -93,6 +100,43 @@ export default {
 
         updateBoss() {
 
+        },
+
+        deleteBoss(id) {
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+                }).then((result) => {
+
+                    // Send to server   
+                    this.form.delete('/boss/'+id).then(() => 
+                    {
+                        if (result.value) 
+                        {
+                            Swal.fire(
+                            'Deleted!',
+                            'Your file has been deleted.',
+                            'success'
+                            );
+                            
+                            this.loadBosses();
+                        }
+                    }).catch((error) => {
+                        Swal.fire(
+                            'Attention gamers!',
+                            'Something went wrong',
+                            'warning'
+                            );
+                        console.log(error);
+                    });
+
+                    
+                })
         },
 
         createBoss() {
