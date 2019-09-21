@@ -10,4 +10,6 @@ class Boss extends Model
     {
         return $this->belongsTo('App\Raid');
     }
+
+    protected $fillable = ['raid_id'];
 }
