@@ -15,7 +15,7 @@
                     <td>{{boss.name}}</td>
                     <td>{{boss.order}}</td>
                     <td>
-                        <a class="btn btn-warning"><i class="fas fa-edit"></i></a>
+                        <a @click="openEditModal(boss)" class="btn btn-warning"><i class="fas fa-edit"></i></a>
                         <a @click="deleteBoss(boss.id)" class="btn btn-danger"><i class="fas fa-trash"></i></a>
                     </td>
                 </tr>
@@ -28,7 +28,8 @@
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="bossModalLongTitle">Add a boss</h5>
+                        <h5 v-show="!editMode" class="modal-title" id="bossModalLongTitle">Add a boss</h5>
+                        <h5 v-show="editMode" class="modal-title" id="bossModalLongTitle">Edit boss</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                         </button>
@@ -53,7 +54,8 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-success">Add</button>
+                        <button v-show="!editMode" type="submit" class="btn btn-success">Add</button>
+                        <button v-show="editMode" type="submit" class="btn btn-success">Edit</button>
                     </div>
                     </div>
                 </div>
@@ -87,19 +89,24 @@ export default {
 
     methods: {
         loadBosses() {
-            axios.get("/boss").then(({data}) => (this.bosses = data));
+            axios.get("/boss/"+this.idRaid).then(({data}) => (this.bosses = data));
         },
 
         openCreateModal() {
-            console.log('salut') ;
             $('#bossModal').modal('show');
             this.form.clear();
             this.form.reset();
+            this.form.idRaid = this.idRaid;
             this.editMode = false;
         },
 
-        updateBoss() {
-
+        openEditModal(boss) {
+            this.editMode = true;
+            this.form.clear();
+            this.form.reset();
+            this.form.fill(boss);
+            this.form.idRaid = this.idRaid;
+            $('#bossModal').modal('show');
         },
 
         deleteBoss(id) {
@@ -154,12 +161,22 @@ export default {
             })
         },
 
+        updateBoss() {
+            this.form.put('/boss/'+this.form.id).then(() => {
+                this.loadBosses();
+                $('#bossModal').modal('hide');
+                Toast.fire({
+                    type: 'success',
+                    title: 'Boss edited',
+                });
+            }).catch(e => {
+                console.log(e);
+            });
+        },
 
     },
 
     mounted() {
-        //console.log('Component mounted.');
-        
         this.loadBosses();
     },
 }

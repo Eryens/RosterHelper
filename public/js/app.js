@@ -6276,6 +6276,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     idRaid: {
@@ -6299,19 +6301,26 @@ __webpack_require__.r(__webpack_exports__);
     loadBosses: function loadBosses() {
       var _this = this;
 
-      axios.get("/boss").then(function (_ref) {
+      axios.get("/boss/" + this.idRaid).then(function (_ref) {
         var data = _ref.data;
         return _this.bosses = data;
       });
     },
     openCreateModal: function openCreateModal() {
-      console.log('salut');
       $('#bossModal').modal('show');
       this.form.clear();
       this.form.reset();
+      this.form.idRaid = this.idRaid;
       this.editMode = false;
     },
-    updateBoss: function updateBoss() {},
+    openEditModal: function openEditModal(boss) {
+      this.editMode = true;
+      this.form.clear();
+      this.form.reset();
+      this.form.fill(boss);
+      this.form.idRaid = this.idRaid;
+      $('#bossModal').modal('show');
+    },
     deleteBoss: function deleteBoss(id) {
       var _this2 = this;
 
@@ -6351,10 +6360,24 @@ __webpack_require__.r(__webpack_exports__);
       })["catch"](function (e) {
         console.log(e);
       });
+    },
+    updateBoss: function updateBoss() {
+      var _this4 = this;
+
+      this.form.put('/boss/' + this.form.id).then(function () {
+        _this4.loadBosses();
+
+        $('#bossModal').modal('hide');
+        Toast.fire({
+          type: 'success',
+          title: 'Boss edited'
+        });
+      })["catch"](function (e) {
+        console.log(e);
+      });
     }
   },
   mounted: function mounted() {
-    //console.log('Component mounted.');
     this.loadBosses();
   }
 });
@@ -49436,7 +49459,18 @@ var render = function() {
             _c("td", [_vm._v(_vm._s(boss.order))]),
             _vm._v(" "),
             _c("td", [
-              _vm._m(1, true),
+              _c(
+                "a",
+                {
+                  staticClass: "btn btn-warning",
+                  on: {
+                    click: function($event) {
+                      return _vm.openEditModal(boss)
+                    }
+                  }
+                },
+                [_c("i", { staticClass: "fas fa-edit" })]
+              ),
               _vm._v(" "),
               _c(
                 "a",
@@ -49489,7 +49523,43 @@ var render = function() {
               },
               [
                 _c("div", { staticClass: "modal-content" }, [
-                  _vm._m(2),
+                  _c("div", { staticClass: "modal-header" }, [
+                    _c(
+                      "h5",
+                      {
+                        directives: [
+                          {
+                            name: "show",
+                            rawName: "v-show",
+                            value: !_vm.editMode,
+                            expression: "!editMode"
+                          }
+                        ],
+                        staticClass: "modal-title",
+                        attrs: { id: "bossModalLongTitle" }
+                      },
+                      [_vm._v("Add a boss")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "h5",
+                      {
+                        directives: [
+                          {
+                            name: "show",
+                            rawName: "v-show",
+                            value: _vm.editMode,
+                            expression: "editMode"
+                          }
+                        ],
+                        staticClass: "modal-title",
+                        attrs: { id: "bossModalLongTitle" }
+                      },
+                      [_vm._v("Edit boss")]
+                    ),
+                    _vm._v(" "),
+                    _vm._m(1)
+                  ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "modal-body" }, [
                     _c(
@@ -49565,7 +49635,50 @@ var render = function() {
                     )
                   ]),
                   _vm._v(" "),
-                  _vm._m(3)
+                  _c("div", { staticClass: "modal-footer" }, [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-secondary",
+                        attrs: { type: "button", "data-dismiss": "modal" }
+                      },
+                      [_vm._v("Close")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        directives: [
+                          {
+                            name: "show",
+                            rawName: "v-show",
+                            value: !_vm.editMode,
+                            expression: "!editMode"
+                          }
+                        ],
+                        staticClass: "btn btn-success",
+                        attrs: { type: "submit" }
+                      },
+                      [_vm._v("Add")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        directives: [
+                          {
+                            name: "show",
+                            rawName: "v-show",
+                            value: _vm.editMode,
+                            expression: "editMode"
+                          }
+                        ],
+                        staticClass: "btn btn-success",
+                        attrs: { type: "submit" }
+                      },
+                      [_vm._v("Edit")]
+                    )
+                  ])
                 ])
               ]
             )
@@ -49594,55 +49707,18 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("a", { staticClass: "btn btn-warning" }, [
-      _c("i", { staticClass: "fas fa-edit" })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-header" }, [
-      _c(
-        "h5",
-        { staticClass: "modal-title", attrs: { id: "bossModalLongTitle" } },
-        [_vm._v("Add a boss")]
-      ),
-      _vm._v(" "),
-      _c(
-        "button",
-        {
-          staticClass: "close",
-          attrs: {
-            type: "button",
-            "data-dismiss": "modal",
-            "aria-label": "Close"
-          }
-        },
-        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-footer" }, [
-      _c(
-        "button",
-        {
-          staticClass: "btn btn-secondary",
-          attrs: { type: "button", "data-dismiss": "modal" }
-        },
-        [_vm._v("Close")]
-      ),
-      _vm._v(" "),
-      _c(
-        "button",
-        { staticClass: "btn btn-success", attrs: { type: "submit" } },
-        [_vm._v("Add")]
-      )
-    ])
+    return _c(
+      "button",
+      {
+        staticClass: "close",
+        attrs: {
+          type: "button",
+          "data-dismiss": "modal",
+          "aria-label": "Close"
+        }
+      },
+      [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+    )
   }
 ]
 render._withStripped = true

@@ -15,7 +15,6 @@ class BossController extends Controller
      */
     public function index()
     {
-        return Boss::all();
     }
 
     /**
@@ -44,10 +43,8 @@ class BossController extends Controller
         $this->validate($request, [
             'idRaid' => 'required|Numeric',
             'name' => 'required|String|max:25',
-            'order' => 'required|String' 
+            'order' => 'required|Numeric' 
         ]);
-
-        var_dump($request['name']);
 
         return Boss::create([
             'raid_id' => $request['idRaid'],
@@ -64,7 +61,8 @@ class BossController extends Controller
      */
     public function show($id)
     {
-        //
+        $bosses = Boss::where('raid_id', $id)->orderBy('order')->get();
+        return $bosses;
     }
 
     /**
@@ -87,7 +85,17 @@ class BossController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $boss = Boss::findOrFail($id);
+
+        $this->validate($request, [
+            'idRaid' => 'required|Numeric',
+            'name' => 'required|String|max:25',
+            'order' => 'required|Numeric' 
+        ]);
+
+        $boss->update($request->all());
+
+        return ['message' => 'Updated boss' . $id];
     }
 
     /**
