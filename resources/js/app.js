@@ -49,6 +49,7 @@ window.Toast = Toast;
 Vue.component('order-list', require('./components/OrderList.vue').default);
 Vue.component('display-order', require('./components/DisplayOrder.vue').default);
 Vue.component('boss-list', require('./components/ListBosses').default);
+Vue.component('user-list', require('./components/UserList.vue').default)
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
