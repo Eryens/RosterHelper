@@ -14,8 +14,8 @@ class AddPlayerClassToUsers extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->integer('player_class_id')->unsigned();
-            $table->foreign('player_class_id')->references('id')->on('player_classes');
+            $table->integer('player_class_id')->unsigned()->nullable();
+            $table->foreign('player_class_id')->references('id')->on('player_classes')->nullable();
         });
     }
 
