@@ -15,35 +15,25 @@
 
                     {{Form::label('currentRaid', 'Current raid')}}
                     {{Form::checkbox('currentRaid', $raid->currentRaid, $raid->currentRaid)}}
-                </div>
-        
-                {{Form::hidden('_method', 'PUT')}}
 
-                <div class="row">
-                    <div class="col-lg-11">
+                    <div class="row">
+                        {{Form::hidden('_method', 'PUT')}}
                         {{Form::submit('Edit Raid parameters', ['class' => 'btn btn-warning'])}}
                     </div>
                     {!! Form::close() !!}
-                    {{-- <div class="col-lg-1" style="">
+                </div>
+                {{-- <div class="row">
+                    
+                    <div class="col-lg-1" style="">
                         {!!Form::open(['action' => ['RaidController@destroy', $raid->id], 'method' => 'POST', 'class' => 'pull-right'])!!}
                             {{Form::hidden('_method', 'DELETE')}}
                             {{Form::submit('Delete this raid', ['class' => 'btn btn-danger'])}}
                         {!!Form::close()!!}
-                    </div> --}}
-                </div>
+                    </div>
+                </div> --}}
             </div>
         </div>
-        <boss-list v-bind:id-raid="{{$raid->id}}">></boss-list>
+        <boss-list v-bind:id-raid="{{$raid->id}}"></boss-list>
     </div>
 
 @endsection
-
-@section('js')
-
-<script type="text/javascript" defer>
-    $(function() {
-        //console.log( "ready!" );
-    });
-</script>
-
-@append

@@ -15,7 +15,7 @@ class RaidController extends Controller
     public function index()
     {
         $raids = Raids::all();
-        return view('raid.index')->with('raids', $raids);
+        return view('admin.raid.index')->with('raids', $raids);
     }
 
     /**
@@ -25,7 +25,7 @@ class RaidController extends Controller
      */
     public function create()
     {
-        return view('raid.create');
+        return view('admin.raid.create');
     }
 
     /**
@@ -45,7 +45,7 @@ class RaidController extends Controller
         $raid->currentRaid = $request->has('currentRaid');
         $raid->save();
 
-        return redirect('/raid')->with('success', 'Raid added');
+        return redirect('raid')->with('success', 'Raid added');
     }
 
     /**
@@ -69,7 +69,7 @@ class RaidController extends Controller
     {
         $raid = Raids::find($id);
 
-        return view('raid.edit')->with('raid', $raid);
+        return view('admin.raid.edit')->with('raid', $raid);
     }
 
     /**
