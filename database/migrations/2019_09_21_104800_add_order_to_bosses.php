@@ -14,7 +14,7 @@ class AddOrderToBosses extends Migration
     public function up()
     {
         Schema::table('bosses', function (Blueprint $table) {
-            $table->integer('order');
+            $table->integer('order')->default('1');
         });
     }
 

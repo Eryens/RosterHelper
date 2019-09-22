@@ -17,8 +17,10 @@
                     {{Form::checkbox('currentRaid', $raid->currentRaid, $raid->currentRaid)}}
 
                     <div class="row">
-                        {{Form::hidden('_method', 'PUT')}}
-                        {{Form::submit('Edit Raid parameters', ['class' => 'btn btn-warning'])}}
+                        <div class="col-md-12">
+                            {{Form::hidden('_method', 'PUT')}}
+                            {{Form::submit('Edit Raid parameters', ['class' => 'btn btn-warning'])}}
+                        </div>
                     </div>
                     {!! Form::close() !!}
                 </div>

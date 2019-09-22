@@ -14,7 +14,7 @@ class AddOfficerNoteToUsers extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('officer_note');
+            $table->string('officer_note')->default('');
         });
     }
 

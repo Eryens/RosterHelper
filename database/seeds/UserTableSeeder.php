@@ -21,6 +21,7 @@ class UserTableSeeder extends Seeder
             'username' => 'Eryens',
             'password' => bcrypt('admin'),
             'player_class_id' => $druid->id,
+            'officer_note' => 'very cool',
         ]);
 
         $user = User::where('username', 'Eryens')->first();

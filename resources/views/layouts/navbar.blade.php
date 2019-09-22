@@ -9,26 +9,29 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <!-- Left Side Of Navbar -->
-            @can('admin access')
-                <ul class="navbar-nav mr-auto">
+            <ul class="navbar-nav mr-auto">
+                @can('admin access')
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{route('raid.index')}}">Manage Raids</a>
+                        </li>
+                        {{-- <li class="nav-item dropdown"> Is here for future reference, in case ..?
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Dropdown link
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <a class="dropdown-item" href="#">Action</a>
+                                <a class="dropdown-item" href="#">Another action</a>
+                                <a class="dropdown-item" href="#">Something else here</a>
+                            </div>
+                        </li> --}}
+                    
+                @endcan
+                @can('manage guild')            
                     <li class="nav-item">
-                        <a class="nav-link" href="{{route('raid.index')}}">Manage Raids</a>
+                        <a class="nav-link" href="{{route('user.index')}}">Manage Raid Team</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{route('user.index')}}">Manage Users</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Dropdown link
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <a class="dropdown-item" href="#">Action</a>
-                            <a class="dropdown-item" href="#">Another action</a>
-                            <a class="dropdown-item" href="#">Something else here</a>
-                        </div>
-                    </li>
-                </ul>
-            @endcan
+                @endcan
+            </ul>
 
             <!-- Right Side Of Navbar -->
             <ul class="navbar-nav ml-auto">
