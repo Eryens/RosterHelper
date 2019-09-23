@@ -6278,6 +6278,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     idRaid: {
@@ -6292,12 +6299,18 @@ __webpack_require__.r(__webpack_exports__);
         id: '',
         name: '',
         order: '',
-        idRaid: this.idRaid
+        idRaid: this.idRaid,
+        img: null
       }),
       editMode: false
     };
   },
   methods: {
+    uploadImage: function uploadImage(e) {
+      var file = e.target.files[0];
+      console.log(file);
+      this.form.img = file;
+    },
     loadBosses: function loadBosses() {
       var _this = this;
 
@@ -6349,7 +6362,12 @@ __webpack_require__.r(__webpack_exports__);
     createBoss: function createBoss() {
       var _this3 = this;
 
-      this.form.post('/boss').then(function () {
+      this.form.submit('post', '/boss', {
+        // Transform form data to FormData
+        transformRequest: [function (data, headers) {
+          return objectToFormData(data);
+        }]
+      }).then(function () {
         _this3.loadBosses();
 
         $('#bossModal').modal('hide');
@@ -39030,6 +39048,22 @@ return jQuery;
 
 /***/ }),
 
+/***/ "./node_modules/object-to-formdata/dist/index.js":
+/*!*******************************************************!*\
+  !*** ./node_modules/object-to-formdata/dist/index.js ***!
+  \*******************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return i; });
+function n(e){return(n="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(n){return typeof n}:function(n){return n&&"function"==typeof Symbol&&n.constructor===Symbol&&n!==Symbol.prototype?"symbol":typeof n})(e)}var e=function(n){return void 0===n},t=function(n){return Array.isArray(n)},o=function(n){return n&&"number"==typeof n.size&&"string"==typeof n.type&&"function"==typeof n.slice};function i(r,f,u,s){if((f=f||{}).indices=!e(f.indices)&&f.indices,f.nullsAsUndefineds=!e(f.nullsAsUndefineds)&&f.nullsAsUndefineds,u=u||new FormData,e(r))return u;if(null===r)f.nullsAsUndefineds||u.append(s,"");else if(t(r))if(r.length)r.forEach(function(n,e){var t=s+"["+(f.indices?e:"")+"]";i(n,f,u,t)});else{var l=s+"[]";u.append(l,"")}else!function(n){return n instanceof Date}(r)?!function(n){return n===Object(n)}(r)||function(e){return o(e)&&"string"==typeof e.name&&("object"===n(e.lastModifiedDate)||"number"==typeof e.lastModified)}(r)||o(r)?u.append(s,r):Object.keys(r).forEach(function(n){var e=r[n];if(t(e))for(;n.length>2&&n.lastIndexOf("[]")===n.length-2;)n=n.substring(0,n.length-2);i(e,f,u,s?s+"["+n+"]":n)}):u.append(s,r.toISOString());return u}
+//# sourceMappingURL=index.js.map
+
+
+/***/ }),
+
 /***/ "./node_modules/popper.js/dist/esm/popper.js":
 /*!***************************************************!*\
   !*** ./node_modules/popper.js/dist/esm/popper.js ***!
@@ -50480,7 +50514,26 @@ var render = function() {
                         })
                       ],
                       1
-                    )
+                    ),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("label", [_vm._v("Boss' face")]),
+                      _vm._v(" "),
+                      _c("br"),
+                      _vm._v(" "),
+                      _c("input", {
+                        attrs: {
+                          type: "file",
+                          accept: "image/*",
+                          id: "file-input"
+                        },
+                        on: {
+                          change: function($event) {
+                            return _vm.uploadImage($event)
+                          }
+                        }
+                      })
+                    ])
                   ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "modal-footer" }, [
@@ -63299,8 +63352,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var sortablejs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! sortablejs */ "./node_modules/sortablejs/modular/sortable.esm.js");
 /* harmony import */ var jquery_sortablejs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! jquery-sortablejs */ "./node_modules/jquery-sortablejs/jquery-sortable.js");
 /* harmony import */ var jquery_sortablejs__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(jquery_sortablejs__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
-/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var object_to_formdata__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! object-to-formdata */ "./node_modules/object-to-formdata/dist/index.js");
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_4__);
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -63318,11 +63372,14 @@ window.Form = vform__WEBPACK_IMPORTED_MODULE_0__["Form"]; // Adding sortableJS
 
 
 window.Sortable = sortablejs__WEBPACK_IMPORTED_MODULE_1__["default"];
-window.sortable = jquery_sortablejs__WEBPACK_IMPORTED_MODULE_2___default.a; // Adding sweetAlert
+window.sortable = jquery_sortablejs__WEBPACK_IMPORTED_MODULE_2___default.a; // Import object to formdata
 
 
-window.Swal = sweetalert2__WEBPACK_IMPORTED_MODULE_3___default.a;
-var Toast = sweetalert2__WEBPACK_IMPORTED_MODULE_3___default.a.mixin({
+window.objectToFormData = object_to_formdata__WEBPACK_IMPORTED_MODULE_3__["default"]; // Adding sweetAlert
+
+
+window.Swal = sweetalert2__WEBPACK_IMPORTED_MODULE_4___default.a;
+var Toast = sweetalert2__WEBPACK_IMPORTED_MODULE_4___default.a.mixin({
   toast: true,
   position: 'top-end',
   showConfirmButton: false,

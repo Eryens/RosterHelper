@@ -43,13 +43,18 @@ class BossController extends Controller
         $this->validate($request, [
             'idRaid' => 'required|Numeric',
             'name' => 'required|String|max:25',
-            'order' => 'required|Numeric' 
+            'order' => 'required|Numeric',
         ]);
+
+        // Image stuff
+        $imageName = $request['name'].'.'.$request->img->getClientOriginalExtension();
+        $request->image->move(public_path('img'), $imageName);
 
         return Boss::create([
             'raid_id' => $request['idRaid'],
             'name' => $request['name'],
             'order' => $request['order'],
+            'img_path' => public_path('img').$imageName,
         ]);
     }
 
@@ -92,6 +97,11 @@ class BossController extends Controller
             'name' => 'required|String|max:25',
             'order' => 'required|Numeric' 
         ]);
+
+        // Image stuff
+        // Image stuff
+        $imageName = $request['name'].'.'.$request->img->getClientOriginalExtension();
+        $request->image->move(public_path('img'), $imageName);
 
         $boss->update($request->all());
 

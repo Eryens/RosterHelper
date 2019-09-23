@@ -20,6 +20,10 @@ import sortable from 'jquery-sortablejs';
 window.Sortable = Sortable;
 window.sortable = sortable;
 
+// Import object to formdata
+import objectToFormData from 'object-to-formdata';
+window.objectToFormData = objectToFormData;
+
 // Adding sweetAlert
 import swal from 'sweetalert2';
 window.Swal = swal;

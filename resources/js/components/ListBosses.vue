@@ -51,6 +51,13 @@
                             <has-error :form="form" field="order"></has-error>
                         </div>
 
+                        <div class="form-group">
+                            <label>Boss' face</label>
+                            <br/>
+                            <input type="file" accept="image/*" @change="uploadImage($event)" id="file-input">
+                        </div>
+
+
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -65,6 +72,7 @@
 </template>
     
 <script>
+
 export default {
 
     props: {
@@ -82,12 +90,19 @@ export default {
                 name: '',
                 order: '',
                 idRaid: this.idRaid,
+                img: null,
             }),
             editMode : false,
         }
     },
 
     methods: {
+        uploadImage(e) {
+            const file = e.target.files[0];
+            console.log(file);
+            this.form.img = file;
+        },
+
         loadBosses() {
             axios.get("/boss/"+this.idRaid).then(({data}) => (this.bosses = data));
         },
@@ -147,7 +162,12 @@ export default {
         },
 
         createBoss() {
-            this.form.post('/boss').then(() => 
+            this.form.submit('post', '/boss', {
+                // Transform form data to FormData
+              transformRequest: [function (data, headers) {
+                return objectToFormData(data)
+              }],
+            }).then(() => 
             {
                 this.loadBosses();
                 $('#bossModal').modal('hide');
