@@ -6382,7 +6382,12 @@ __webpack_require__.r(__webpack_exports__);
     updateBoss: function updateBoss() {
       var _this4 = this;
 
-      this.form.put('/boss/' + this.form.id).then(function () {
+      this.form.submit('put', '/boss/' + this.form.id, {
+        // Transform form data to FormData
+        transformRequest: [function (data, headers) {
+          return objectToFormData(data);
+        }]
+      }).then(function () {
         _this4.loadBosses();
 
         $('#bossModal').modal('hide');

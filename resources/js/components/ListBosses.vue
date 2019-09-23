@@ -182,7 +182,12 @@ export default {
         },
 
         updateBoss() {
-            this.form.put('/boss/'+this.form.id).then(() => {
+            this.form.submit('put', '/boss/'+this.form.id, {
+                // Transform form data to FormData
+              transformRequest: [function (data, headers) {
+                return objectToFormData(data)
+              }],
+            }).then(() => {
                 this.loadBosses();
                 $('#bossModal').modal('hide');
                 Toast.fire({

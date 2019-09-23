@@ -11,5 +11,5 @@ class Boss extends Model
         return $this->belongsTo('App\Raid');
     }
 
-    protected $fillable = ['raid_id', 'name', 'order'];
+    protected $fillable = ['raid_id', 'name', 'order', 'img_path'];
 }

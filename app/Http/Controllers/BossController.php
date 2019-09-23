@@ -48,7 +48,7 @@ class BossController extends Controller
 
         // Image stuff
         $imageName = $request['name'].'.'.$request->img->getClientOriginalExtension();
-        $request->image->move(public_path('img'), $imageName);
+        $request->img->move(public_path('img'), $imageName);
 
         return Boss::create([
             'raid_id' => $request['idRaid'],
@@ -98,10 +98,8 @@ class BossController extends Controller
             'order' => 'required|Numeric' 
         ]);
 
-        // Image stuff
-        // Image stuff
         $imageName = $request['name'].'.'.$request->img->getClientOriginalExtension();
-        $request->image->move(public_path('img'), $imageName);
+        $request->img->move(public_path('img'), $imageName);
 
         $boss->update($request->all());
 
