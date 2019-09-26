@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
 use App\Raids;
 use App\Boss;
 
@@ -73,6 +75,8 @@ class BossController extends Controller
              'order' => 'required|Numeric',
          ]);
 
+         $this->deletePictureOfBoss($boss->img_path);
+         
         // Image stuff
         $imageName = $request['name'].'.'.$request->img->getClientOriginalExtension();
         $imgPath = '/img/' . $imageName;
@@ -116,25 +120,7 @@ class BossController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
-        $boss = Boss::findOrFail($id);
-
-         $this->validate($request, [
-             'idRaid' => 'required',
-             'name' => 'required|String|max:25',
-             'order' => 'required|Numeric',
-         ]);
-
-        //$imageName = $request['name'].'.'.$request->img->getClientOriginalExtension();
-        //$imgPath = "/img/" . $imageName;
-        //$request->img->move(public_path('img'), $imageName);
-
-        //$boss->img_path = $imgPath;
-        //$boss->save();
-        //$boss->update($request->all());
-
-        return ['message' => 'Updated boss' . $id];
-    }
+    {}
 
     /**
      * Remove the specified resource from storage.
@@ -146,8 +132,17 @@ class BossController extends Controller
     {
         $boss = Boss::findOrFail($id);
 
+        $this->deletePictureOfBoss($boss->img_path);
+
         $boss->delete();
 
         return ['message' => 'boss deleted'];
+    }
+
+    private function deletePictureOfBoss($picPath) 
+    {
+        if (file_exists(public_path().$picPath)) {
+            File::delete(public_path().$picPath);
+        }
     }
 }
