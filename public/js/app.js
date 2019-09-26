@@ -6285,6 +6285,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     idRaid: {
@@ -6382,7 +6384,7 @@ __webpack_require__.r(__webpack_exports__);
     updateBoss: function updateBoss() {
       var _this4 = this;
 
-      this.form.submit('put', '/boss/' + this.form.id, {
+      this.form.submit('post', '/boss/updateBoss/' + this.form.id, {
         // Transform form data to FormData
         transformRequest: [function (data, headers) {
           return objectToFormData(data);
@@ -50341,6 +50343,13 @@ var render = function() {
         "tbody",
         _vm._l(_vm.bosses, function(boss) {
           return _c("tr", { key: boss.id }, [
+            _c("td", [
+              _c("img", {
+                staticClass: "boss-icon",
+                attrs: { src: boss.img_path, alt: boss.name }
+              })
+            ]),
+            _vm._v(" "),
             _c("td", [_vm._v(_vm._s(boss.name))]),
             _vm._v(" "),
             _c("td", [_vm._v(_vm._s(boss.order))]),
@@ -50601,6 +50610,8 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("thead", [
       _c("tr", [
+        _c("th"),
+        _vm._v(" "),
         _c("th", [_vm._v("Name")]),
         _vm._v(" "),
         _c("th", [_vm._v("Order")]),

@@ -5,6 +5,7 @@
         <table class="table table-bordered">
             <thead>
                 <tr>
+                    <th></th>
                     <th>Name</th>
                     <th>Order</th>
                     <th>Actions</th>
@@ -12,6 +13,7 @@
             </thead>
             <tbody>
                 <tr v-for="boss in bosses" :key="boss.id">
+                    <td><img class="boss-icon" :src="boss.img_path" v-bind:alt="boss.name"></td>
                     <td>{{boss.name}}</td>
                     <td>{{boss.order}}</td>
                     <td>
@@ -182,11 +184,11 @@ export default {
         },
 
         updateBoss() {
-            this.form.submit('put', '/boss/'+this.form.id, {
+            this.form.submit('post', '/boss/updateBoss/'+this.form.id, {
                 // Transform form data to FormData
-              transformRequest: [function (data, headers) {
-                return objectToFormData(data)
-              }],
+               transformRequest: [function (data, headers) {
+                 return objectToFormData(data)
+               }],
             }).then(() => {
                 this.loadBosses();
                 $('#bossModal').modal('hide');

@@ -27,6 +27,7 @@ Route::group(['middleware' => ['permission:admin access']], function () {
 
     // Boss
     Route::resource('boss', 'BossController');
+    Route::post('boss/updateBoss/{id}', 'BossController@updateBoss')->name('boss.updateBoss');
 
     // Users
     Route::get('user', 'UserController@index')->name('user.index');

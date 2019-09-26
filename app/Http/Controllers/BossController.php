@@ -33,9 +33,6 @@ class BossController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param int raidId
-     * @param string name
-     * @param int order
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -48,14 +45,44 @@ class BossController extends Controller
 
         // Image stuff
         $imageName = $request['name'].'.'.$request->img->getClientOriginalExtension();
+        $imgPath = '/img/' . $imageName;
         $request->img->move(public_path('img'), $imageName);
 
         return Boss::create([
             'raid_id' => $request['idRaid'],
             'name' => $request['name'],
             'order' => $request['order'],
-            'img_path' => public_path('img').$imageName,
+            'img_path' =>$imgPath,
         ]);
+    }
+
+    /**
+     * Update 
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param int raidId
+     * @return \Illuminate\Http\Response
+     */
+    public function updateBoss(Request $request, $id)
+    {
+        $boss = Boss::findOrFail($id);
+
+         $this->validate($request, [
+             'idRaid' => 'required',
+             'name' => 'required|String|max:25',
+             'order' => 'required|Numeric',
+         ]);
+
+        // Image stuff
+        $imageName = $request['name'].'.'.$request->img->getClientOriginalExtension();
+        $imgPath = '/img/' . $imageName;
+        $request->img->move(public_path('img'), $imageName);
+
+        $boss->img_path = $imgPath;
+        $boss->save();
+        $boss->update($request->all());
+
+        return ['message' => 'Updated boss' . $id];
     }
 
     /**
@@ -92,16 +119,19 @@ class BossController extends Controller
     {
         $boss = Boss::findOrFail($id);
 
-        $this->validate($request, [
-            'idRaid' => 'required|Numeric',
-            'name' => 'required|String|max:25',
-            'order' => 'required|Numeric' 
-        ]);
+         $this->validate($request, [
+             'idRaid' => 'required',
+             'name' => 'required|String|max:25',
+             'order' => 'required|Numeric',
+         ]);
 
-        $imageName = $request['name'].'.'.$request->img->getClientOriginalExtension();
-        $request->img->move(public_path('img'), $imageName);
+        //$imageName = $request['name'].'.'.$request->img->getClientOriginalExtension();
+        //$imgPath = "/img/" . $imageName;
+        //$request->img->move(public_path('img'), $imageName);
 
-        $boss->update($request->all());
+        //$boss->img_path = $imgPath;
+        //$boss->save();
+        //$boss->update($request->all());
 
         return ['message' => 'Updated boss' . $id];
     }
