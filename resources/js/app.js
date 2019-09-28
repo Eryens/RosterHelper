@@ -15,10 +15,8 @@ Vue.component(AlertError.name, AlertError)
 window.Form = Form;
 
 // Adding sortableJS
-import Sortable from 'sortablejs';
-import sortable from 'jquery-sortablejs';
-window.Sortable = Sortable;
-window.sortable = sortable;
+import draggable from 'vuedraggable';
+window.draggable = draggable;
 
 // Import object to formdata
 import objectToFormData from 'object-to-formdata';

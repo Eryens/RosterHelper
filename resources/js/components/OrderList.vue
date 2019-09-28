@@ -9,9 +9,12 @@
                 </div>
             </div>
             <div class="col-sm-11 col-bosses">
-                <div v-for="boss in bosses" :key="boss.id" id="bosslist" class="list-group col">
+                <!-- <div v-for="boss in bosses" :key="boss.id" id="bosslist" class="list-group col">
                     <div class="list-group-item"><img class="boss-icon" :src="boss.img_path" :alt="boss.name"> {{boss.name}}</div>
-                </div>
+                </div> -->
+                <draggable v-model="bosses" group="bosses" @start="drag-true" @end="drag-false">
+                    <div class="list-group-item" v-for="boss in bosses" :key="boss.id"><img class="boss-icon" :src="boss.img_path" :alt="boss.name"> {{boss.name}}</div>
+                </draggable>
             </div>
         </div>
 
@@ -24,6 +27,10 @@
 
     export default {
 
+        components: {
+            draggable,
+        },
+
         props: {
             idRaid: {
                 type: Number,
@@ -33,23 +40,15 @@
 
         data() {
             return {
+                drag: [],
                 bosses: [],
             }
         },
 
         methods: {
             loadBosses() {
-                axios.get("/boss/"+this.idRaid).then(({data}) => (this.bosses = data))
-                .then(() => {
-                     this.animateBossList();
-                });
+                axios.get("/boss/"+this.idRaid).then(({data}) => (this.bosses = data));
             },
-
-            animateBossList() {
-                new Sortable(bosslist, {
-                    animation: 150,
-                });
-            }
         },
         
         mounted() {

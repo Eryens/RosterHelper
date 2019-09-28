@@ -32,6 +32,7 @@
         "object-to-formdata": "^2.1.2",
         "sortablejs": "^1.10.0-rc3",
         "sweetalert2": "^8.17.6",
-        "vform": "^1.0.1"
+        "vform": "^1.0.1",
+        "vuedraggable": "^2.23.1"
     }
 }
