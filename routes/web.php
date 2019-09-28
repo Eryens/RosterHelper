@@ -18,8 +18,9 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/class', 'PlayerClassController@index');
-
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/priority', 'PriorityController@choice')->name('priority.choice');
 
 Route::group(['middleware' => ['permission:admin access']], function () {
     // Raid
@@ -29,10 +30,12 @@ Route::group(['middleware' => ['permission:admin access']], function () {
     Route::resource('boss', 'BossController');
     Route::post('boss/updateBoss/{id}', 'BossController@updateBoss')->name('boss.updateBoss');
 
+});
+
+Route::group(['middleware' => ['permission:manage guild']], function () {
     // Users
     Route::get('user', 'UserController@index')->name('user.index');
     Route::get('user/list/{raid}', 'UserController@list')->name('user.list');
     Route::post('user/confirm/', 'UserController@confirm')->name('user.confirm');
     Route::put('user/{id}', 'UserController@update')->name('user.update');
 });
-    

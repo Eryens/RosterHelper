@@ -12,7 +12,7 @@
             <ul class="navbar-nav mr-auto">
                 @can('admin access')
                         <li class="nav-item">
-                            <a class="nav-link" href="{{route('raid.index')}}">Manage Raids</a>
+                            <a class="nav-link" href="{{route('raid.index')}}"><i class="fas fa-cog link-color"></i>Manage Raids</a>
                         </li>
                         {{-- <li class="nav-item dropdown"> Is here for future reference, in case ..?
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -24,13 +24,15 @@
                                 <a class="dropdown-item" href="#">Something else here</a>
                             </div>
                         </li> --}}
-                    
                 @endcan
                 @can('manage guild')            
                     <li class="nav-item">
-                        <a class="nav-link" href="{{route('user.index')}}">Manage Raid Team</a>
+                        <a class="nav-link" href="{{route('user.index')}}"><i class="link-color fas fa-users"></i> Manage Raid Team</a>
                     </li>
                 @endcan
+                <li class="nav-item">
+                    <a class="nav-link" href="{{route('priority.choice')}}"><i class="fas fa-exclamation link-color"></i> Set proritites</a>
+                </li>
             </ul>
 
             <!-- Right Side Of Navbar -->

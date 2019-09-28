@@ -6418,7 +6418,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var sortablejs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! sortablejs */ "./node_modules/sortablejs/modular/sortable.esm.js");
 //
 //
 //
@@ -6441,30 +6440,37 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
 /* harmony default export */ __webpack_exports__["default"] = ({
-  mounted: function mounted() {
-    console.log('Component mounted.');
-    console.log($('#example1').text()); // works
+  props: {
+    idRaid: {
+      type: Number,
+      required: true
+    }
+  },
+  data: function data() {
+    return {
+      bosses: []
+    };
+  },
+  methods: {
+    loadBosses: function loadBosses() {
+      var _this = this;
 
-    new sortablejs__WEBPACK_IMPORTED_MODULE_0__["default"](bosslist, {
-      animation: 150,
-      ghostClass: 'blue-background-class'
-    });
+      axios.get("/boss/" + this.idRaid).then(function (_ref) {
+        var data = _ref.data;
+        return _this.bosses = data;
+      }).then(function () {
+        _this.animateBossList();
+      });
+    },
+    animateBossList: function animateBossList() {
+      new Sortable(bosslist, {
+        animation: 150
+      });
+    }
+  },
+  mounted: function mounted() {
+    this.loadBosses();
   }
 });
 
@@ -50659,132 +50665,59 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", [
-      _c("h4", [_vm._v("Drag and drop the bosses in the order you want :")]),
-      _vm._v(" "),
-      _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col-sm-1 col-numbers" }, [
-          _c("div", { staticClass: "list-group col col-numbers" }, [
-            _c("div", { staticClass: "list-group-item priority-number" }, [
-              _vm._v("1")
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "list-group-item priority-number" }, [
-              _vm._v("2")
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "list-group-item priority-number" }, [
-              _vm._v("3")
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "list-group-item priority-number" }, [
-              _vm._v("4")
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "list-group-item priority-number" }, [
-              _vm._v("5")
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "list-group-item priority-number" }, [
-              _vm._v("6")
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "list-group-item priority-number" }, [
-              _vm._v("7")
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "list-group-item priority-number" }, [
-              _vm._v("8")
-            ])
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-sm-11 col-bosses" }, [
-          _c(
+  return _c("div", [
+    _c("h4", [_vm._v("Drag and drop the bosses in the order you want :")]),
+    _vm._v(" "),
+    _c("div", { staticClass: "row" }, [
+      _c(
+        "div",
+        { staticClass: "col-sm-1 col-numbers" },
+        _vm._l(_vm.bosses, function(boss) {
+          return _c(
             "div",
-            { staticClass: "list-group col", attrs: { id: "bosslist" } },
+            { key: boss.id, staticClass: "list-group col col-numbers" },
+            [
+              _c("div", { staticClass: "list-group-item priority-number" }, [
+                _vm._v(_vm._s(boss.order))
+              ])
+            ]
+          )
+        }),
+        0
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "col-sm-11 col-bosses" },
+        _vm._l(_vm.bosses, function(boss) {
+          return _c(
+            "div",
+            {
+              key: boss.id,
+              staticClass: "list-group col",
+              attrs: { id: "bosslist" }
+            },
             [
               _c("div", { staticClass: "list-group-item" }, [
                 _c("img", {
                   staticClass: "boss-icon",
-                  attrs: { src: "img/sivara-icon.jpg", alt: "" }
+                  attrs: { src: boss.img_path, alt: boss.name }
                 }),
-                _vm._v("Sivara")
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "list-group-item" }, [
-                _c("img", {
-                  staticClass: "boss-icon",
-                  attrs: { src: "img/behemoth-icon.jpg", alt: "" }
-                }),
-                _vm._v("Blackwater Behemoth")
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "list-group-item" }, [
-                _c("img", {
-                  staticClass: "boss-icon",
-                  attrs: { src: "img/radiance-icon.jpg", alt: "" }
-                }),
-                _vm._v("Radiance of Azshara")
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "list-group-item" }, [
-                _c("img", {
-                  staticClass: "boss-icon",
-                  attrs: { src: "img/ashvane-icon.jpg", alt: "" }
-                }),
-                _vm._v("Lady Ashvane")
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "list-group-item" }, [
-                _c("img", {
-                  staticClass: "boss-icon",
-                  attrs: { src: "img/orgozoa-icon.jpg", alt: "" }
-                }),
-                _vm._v("Orgozoa")
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "list-group-item" }, [
-                _c("img", {
-                  staticClass: "boss-icon",
-                  attrs: { src: "img/court-icon.jpg", alt: "" }
-                }),
-                _vm._v("Queen's Court")
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "list-group-item" }, [
-                _c("img", {
-                  staticClass: "boss-icon",
-                  attrs: { src: "img/zaqul-icon.jpg", alt: "" }
-                }),
-                _vm._v("Za'qul")
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "list-group-item" }, [
-                _c("img", {
-                  staticClass: "boss-icon",
-                  attrs: { src: "img/azshara-icon.jpg", alt: "" }
-                }),
-                _vm._v("Queen Azshara")
+                _vm._v(" " + _vm._s(boss.name))
               ])
             ]
           )
-        ])
-      ]),
-      _vm._v(" "),
-      _c("a", { staticClass: "btn btn-success btn-lg", attrs: { href: "#" } }, [
-        _vm._v("Save this order")
-      ])
+        }),
+        0
+      )
+    ]),
+    _vm._v(" "),
+    _c("a", { staticClass: "btn btn-success btn-lg", attrs: { href: "#" } }, [
+      _vm._v("Save this order")
     ])
-  }
-]
+  ])
+}
+var staticRenderFns = []
 render._withStripped = true
 
 
